@@ -3,10 +3,17 @@ package com.figure1.imagescroll.network;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
+import org.apache.http.HttpEntity;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class NetworkManager {
     private static NetworkManager networkManager;
@@ -43,10 +50,39 @@ public class NetworkManager {
                     authListener.failure("failed: response is unsuccessful");
                 } else {
                     // do something wih the result
-                    authListener.success(response);
+                    try {
+                        JSONObject object = new JSONObject(response.body().string());
+                        authListener.success(object);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+
                 }
             }
 
         });
+    }
+
+    private static String convertStreamToString(InputStream is) {
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        StringBuilder sb = new StringBuilder();
+
+        String line = null;
+        try {
+            while ((line = reader.readLine()) != null) {
+                sb.append(line + "\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return sb.toString();
     }
 }
