@@ -1,4 +1,4 @@
-package com.figure1.figure1test.presentation.adapters;
+package com.figure1.presentation.adapters;
 
 import android.support.v7.widget.RecyclerView;
 
@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.figure1.figure1test.helper.ImageLoaderView;
-import com.figure1.figure1test.model.ImageDataModel;
+import com.figure1.helper.ImageLoaderView;
+import com.figure1.model.ImageDataModel;
 import com.figure1.test.figure1test.R;
 
 import java.util.ArrayList;

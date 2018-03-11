@@ -1,10 +1,10 @@
-package com.figure1.figure1test.presentation.presenters;
+package com.figure1.presentation.presenters;
 import android.arch.lifecycle.ViewModel;
 import android.util.Log;
 
-import com.figure1.figure1test.model.ImageDataModel;
-import com.figure1.figure1test.network_layer.AuthListener;
-import com.figure1.figure1test.presentation.listeners.OnDataUpdateListener;
+import com.figure1.model.ImageDataModel;
+import com.figure1.network_layer.AuthListener;
+import com.figure1.presentation.listeners.OnDataUpdateListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;

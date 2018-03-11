@@ -1,4 +1,4 @@
-package com.figure1.figure1test.network_layer;
+package com.figure1.network_layer;
 
 import org.json.JSONObject;
 

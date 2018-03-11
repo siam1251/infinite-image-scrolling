@@ -1,4 +1,4 @@
-package com.figure1.figure1test.presentation.activities;
+package com.figure1.presentation.activities;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Handler;
@@ -9,12 +9,12 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.figure1.figure1test.helper.PageScrolling;
-import com.figure1.figure1test.model.ImageDataModel;
-import com.figure1.figure1test.network_layer.NetworkManager;
-import com.figure1.figure1test.presentation.adapters.ImageScrollAdapter;
-import com.figure1.figure1test.presentation.listeners.OnDataUpdateListener;
-import com.figure1.figure1test.presentation.presenters.DataViewModels;
+import com.figure1.helper.PageScrolling;
+import com.figure1.model.ImageDataModel;
+import com.figure1.network_layer.NetworkManager;
+import com.figure1.presentation.adapters.ImageScrollAdapter;
+import com.figure1.presentation.listeners.OnDataUpdateListener;
+import com.figure1.presentation.presenters.DataViewModels;
 import com.figure1.test.figure1test.R;
 
 import java.util.ArrayList;
