@@ -1,4 +1,4 @@
-package com.figure1.helper;
+package com.figure1.test.figure1test.helper;
 
 import android.content.Context;
 import android.graphics.Bitmap;

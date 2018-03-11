@@ -1,4 +1,4 @@
-package com.figure1.helper;
+package com.figure1.test.figure1test.helper;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;

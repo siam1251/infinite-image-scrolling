@@ -1,4 +1,4 @@
-package com.figure1.test.figure1test
+package figure1.test.figure1test
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4

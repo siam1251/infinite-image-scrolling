@@ -1,21 +1,21 @@
-package com.figure1.presentation.activities;
+package com.figure1.test.figure1test.presentation.activities;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.figure1.helper.PageScrolling;
-import com.figure1.model.ImageDataModel;
-import com.figure1.network_layer.NetworkManager;
-import com.figure1.presentation.adapters.ImageScrollAdapter;
-import com.figure1.presentation.listeners.OnDataUpdateListener;
-import com.figure1.presentation.presenters.DataViewModels;
-import com.figure1.test.figure1test.R;
+import com.figure1.test.figure1test.helper.PageScrolling;
+import com.figure1.test.figure1test.model.ImageDataModel;
+import com.figure1.test.figure1test.network_layer.NetworkManager;
+import com.figure1.test.figure1test.presentation.adapters.ImageScrollAdapter;
+import com.figure1.test.figure1test.presentation.listeners.OnDataUpdateListener;
+import com.figure1.test.figure1test.presentation.presenters.DataViewModels;
+
 
 import java.util.ArrayList;
 
