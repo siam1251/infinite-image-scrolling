@@ -1,6 +1,4 @@
-package com.figure1.imagescroll.network;
-
-import com.squareup.okhttp.Response;
+package com.figure1.figure1test.network_layer;
 
 import org.json.JSONObject;
 

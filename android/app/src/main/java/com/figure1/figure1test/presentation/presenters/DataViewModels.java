@@ -1,11 +1,10 @@
-package com.figure1.imagescroll.view_models;
+package com.figure1.figure1test.presentation.presenters;
 import android.arch.lifecycle.ViewModel;
 import android.util.Log;
 
-import com.figure1.imagescroll.model.ImageDataModel;
-import com.figure1.imagescroll.network.AuthListener;
-import com.figure1.imagescroll.presentation.activities.MainActivity;
-import com.figure1.imagescroll.presentation.listeners.OnDataUpdateListener;
+import com.figure1.figure1test.model.ImageDataModel;
+import com.figure1.figure1test.network_layer.AuthListener;
+import com.figure1.figure1test.presentation.listeners.OnDataUpdateListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,22 +28,29 @@ public class DataViewModels extends ViewModel  implements AuthListener {
             e.printStackTrace();
             return;
         }
+        int count = 0;
         for (int i = 0; i < jsonArray.length(); i++ ) {
             try {
                 JSONObject object = jsonArray.getJSONObject(i);
                 ImageDataModel model = new ImageDataModel();
                 model.setTitle(object.getString("title"));
                 if (!object.isNull("type") && object.getString("type").equals("image/gif")) {
-                    model.setLinks(object.getString("link"));
+                    continue;
                 } else {
                     JSONObject imageObject = object.getJSONArray("images").getJSONObject(0);
-                    if (imageObject.getString("type").equals("image/gif")) {
+                    if (imageObject.getString("type").equals("image/jpeg")
+                            || imageObject.getString("type").equals("image/png")
+                            || imageObject.getString("type").equals("image/jpg")) {
                         model.setLinks(imageObject.getString("link"));
                     }
 
                 }
                 if (model.getLinks() != null) {
+                    count++;
                     imageList.add(model);
+                    if (count > 10) {
+                        break;
+                    }
                 }
 
             } catch (JSONException e) {

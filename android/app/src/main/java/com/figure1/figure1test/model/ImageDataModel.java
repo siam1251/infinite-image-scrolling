@@ -1,4 +1,4 @@
-package com.figure1.imagescroll.model;
+package com.figure1.figure1test.model;
 
 public class ImageDataModel {
     private String title, links;

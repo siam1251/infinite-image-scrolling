@@ -1,9 +1,8 @@
-package com.figure1.imagescroll.network;
+package com.figure1.figure1test.network_layer;
 
-import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
-import org.apache.http.HttpEntity;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -18,6 +17,7 @@ import java.io.InputStreamReader;
 public class NetworkManager {
     private static NetworkManager networkManager;
     private OkHttpClient client;
+    private final String IMAGE_QUERY_TAG = "IMAGE_QUERY_TAG";
 
     public static NetworkManager getInstance() {
         if (networkManager == null) {
@@ -30,10 +30,16 @@ public class NetworkManager {
         client = new OkHttpClient();
     }
 
-    public void request(final AuthListener authListener) {
+    public void cancelPreviousRequest() {
+        client.getDispatcher().cancel(IMAGE_QUERY_TAG);
+    }
+
+    public void request(final AuthListener authListener, int page) {
+
         Request request = new Request.Builder()
+                .tag(IMAGE_QUERY_TAG)
                 .header("Authorization", "Client-Id e0d9382b96f900b")
-                .url("https://api.imgur.com/3/gallery/hot/")
+                .url("https://api.imgur.com/3/gallery/user/viral/"+String.valueOf(page))
                 .build();
 
 

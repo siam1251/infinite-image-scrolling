@@ -1,4 +1,4 @@
-package com.figure1.imagescroll.presentation.adapters;
+package com.figure1.figure1test.presentation.adapters;
 
 import android.support.v7.widget.RecyclerView;
 
@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.figure1.imagescroll.helper.ImageLoaderView;
-import com.figure1.imagescroll.model.ImageDataModel;
+import com.figure1.figure1test.helper.ImageLoaderView;
+import com.figure1.figure1test.model.ImageDataModel;
 import com.figure1.test.figure1test.R;
 
 import java.util.ArrayList;
@@ -52,7 +52,7 @@ public class ImageScrollAdapter extends RecyclerView.Adapter<ImageScrollAdapter.
         }
         public void updateView(ImageDataModel model) {
             if (model != null) {
-                imageLoaderView.setImageFromURL(model.getLinks(), R.drawable.figure1, true);
+                imageLoaderView.setImageFromURL(model.getLinks(), R.layout.progress, true);
                 titleTextView.setText(model.getTitle());
             }
         }

@@ -6,13 +6,13 @@
     android:layout_height="wrap_content"
     >
     <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/deal_swipe_refresh_layout"
+        android:id="@+id/image_swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/deal_list_recycler_view"
+            android:id="@+id/image_list_recycler_view"
             />
     </android.support.v4.widget.SwipeRefreshLayout>
 </android.support.constraint.ConstraintLayout>

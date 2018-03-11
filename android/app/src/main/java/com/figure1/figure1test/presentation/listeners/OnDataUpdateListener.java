@@ -1,4 +1,4 @@
-package com.figure1.imagescroll.presentation.listeners;
+package com.figure1.figure1test.presentation.listeners;
 
 public interface OnDataUpdateListener {
     void onDataUpdate();
