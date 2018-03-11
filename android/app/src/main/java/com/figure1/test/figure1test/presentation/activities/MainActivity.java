@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements OnDataUpdateListe
 
     private void attachUI() {
         swipeRefreshLayout = findViewById(R.id.image_swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(this);
+
         recyclerView = findViewById(R.id.image_list_recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -68,12 +70,13 @@ public class MainActivity extends AppCompatActivity implements OnDataUpdateListe
 
 
     @Override
-    public void onDataUpdate() {
+    public void onDataUpdate(final int insertionIndex, final int count) {
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
                 swipeRefreshLayout.setRefreshing(false);
-                adapter.notifyDataSetChanged();
+                adapter.notifyItemRangeInserted(insertionIndex, count);
+                //adapter.notifyDataSetChanged();
             }
         });
 
@@ -85,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements OnDataUpdateListe
         scrollListener.resetProperties();
         swipeRefreshLayout.setRefreshing(true);
         viewModel.getImageList().clear();
+        adapter.notifyDataSetChanged();
         NetworkManager.getInstance().request(viewModel, startingIndexPage);
     }
 }

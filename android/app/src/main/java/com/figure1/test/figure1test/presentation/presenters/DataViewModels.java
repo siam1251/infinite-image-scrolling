@@ -16,6 +16,8 @@ public class DataViewModels extends ViewModel  implements AuthListener {
     public static String TAG = "DataViewModels";
     private OnDataUpdateListener dataUpdateListener;
     private ArrayList<ImageDataModel> imageList = new ArrayList<>();
+    private int insertionIndex = 0;
+    private int newItemsCount;
 
 
 
@@ -29,6 +31,7 @@ public class DataViewModels extends ViewModel  implements AuthListener {
             return;
         }
         int count = 0;
+        insertionIndex = imageList.size();
         for (int i = 0; i < jsonArray.length(); i++ ) {
             try {
                 JSONObject object = jsonArray.getJSONObject(i);
@@ -57,8 +60,8 @@ public class DataViewModels extends ViewModel  implements AuthListener {
                 e.printStackTrace();
             }
         }
-        int s = imageList.size();
-        dataUpdateListener.onDataUpdate();
+        newItemsCount = imageList.size();
+        dataUpdateListener.onDataUpdate(insertionIndex, newItemsCount);
     }
 
     @Override
