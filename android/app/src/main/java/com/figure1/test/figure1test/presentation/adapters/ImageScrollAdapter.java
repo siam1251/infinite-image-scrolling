@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.figure1.test.figure1test.helper.ImageLoaderView;
 import com.figure1.test.figure1test.model.ImageDataModel;
-import com.figure2.test.figure1test.R;
+import com.figure1.test.figure1test.R;
 
 import java.util.ArrayList;
 

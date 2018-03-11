@@ -15,6 +15,7 @@ import com.figure1.test.figure1test.network_layer.NetworkManager;
 import com.figure1.test.figure1test.presentation.adapters.ImageScrollAdapter;
 import com.figure1.test.figure1test.presentation.listeners.OnDataUpdateListener;
 import com.figure1.test.figure1test.presentation.presenters.DataViewModels;
+import com.figure1.test.figure1test.R;
 
 
 import java.util.ArrayList;
