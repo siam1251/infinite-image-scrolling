@@ -5,7 +5,7 @@ public class ImageDataModel {
     private String imageCount;
 
     public String getTitle() {
-        return title;
+        return title != null ? title : "";
     }
 
     public void setTitle(String title) {
@@ -13,7 +13,7 @@ public class ImageDataModel {
     }
 
     public String getLinks() {
-        return links;
+        return links != null ? links : "";
     }
 
     public void setLinks(String links) {

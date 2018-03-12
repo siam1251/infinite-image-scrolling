@@ -39,7 +39,9 @@ public class MainActivity extends AppCompatActivity implements OnDataUpdateListe
         attachUI();
         setupAdapter();
         viewModel.setDataUpdateListener(this);
-        NetworkManager.getInstance().request(viewModel, startingIndexPage);
+        if (viewModel.getImageList().isEmpty()) {
+            NetworkManager.networkManager.requestGalleryImageLoad(viewModel, 1);
+        }
     }
 
     private void setupAdapter() {
@@ -62,7 +64,9 @@ public class MainActivity extends AppCompatActivity implements OnDataUpdateListe
         scrollListener = new PageScrolling(layoutManager, scrollingVisibleThreshold, startingIndexPage+1) {
             @Override
             public void onLoadMore(int page, int totalItemsCount) {
-                NetworkManager.getInstance().request(viewModel, page);
+                if (viewModel != null) {
+                    NetworkManager.networkManager.requestGalleryImageLoad(viewModel, page);
+                }
             }
         };
         recyclerView.addOnScrollListener(scrollListener);
@@ -78,7 +82,6 @@ public class MainActivity extends AppCompatActivity implements OnDataUpdateListe
             public void run() {
                 swipeRefreshLayout.setRefreshing(false);
                 adapter.notifyItemRangeInserted(insertionIndex, count);
-                //adapter.notifyDataSetChanged();
             }
         });
 
@@ -86,11 +89,11 @@ public class MainActivity extends AppCompatActivity implements OnDataUpdateListe
 
     @Override
     public void onRefresh() {
-        NetworkManager.getInstance().cancelPreviousRequest();
+        //NetworkManager.getInstance().cancelPreviousRequest();
         scrollListener.resetProperties();
         swipeRefreshLayout.setRefreshing(true);
         viewModel.getImageList().clear();
         adapter.notifyDataSetChanged();
-        NetworkManager.getInstance().request(viewModel, startingIndexPage);
+        NetworkManager.networkManager.requestGalleryImageLoad(viewModel, startingIndexPage);
     }
 }

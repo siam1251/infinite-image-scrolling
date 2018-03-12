@@ -12,4 +12,18 @@ public class ImageResponse {
     @SerializedName("type")
     private String type;
 
+    public String getLink() {
+        return link != null ? link:"";
+    }
+
+    public String getTitle() {
+        return title != null ? title:"" ;
+    }
+
+    public String getType() {
+        return type != null ? type:"";
+    }
+
+
+
 }

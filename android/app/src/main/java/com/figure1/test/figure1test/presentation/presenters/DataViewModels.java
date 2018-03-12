@@ -2,13 +2,12 @@ package com.figure1.test.figure1test.presentation.presenters;
 import android.arch.lifecycle.ViewModel;
 import android.util.Log;
 
+import com.figure1.test.figure1test.model.GalleryResponse;
+import com.figure1.test.figure1test.model.GalleryPostResponse;
 import com.figure1.test.figure1test.model.ImageDataModel;
+import com.figure1.test.figure1test.model.ImageResponse;
 import com.figure1.test.figure1test.network_layer.AuthListener;
 import com.figure1.test.figure1test.presentation.listeners.OnDataUpdateListener;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -22,46 +21,39 @@ public class DataViewModels extends ViewModel  implements AuthListener {
 
 
     @Override
-    public void success(JSONObject response) {
-        JSONArray jsonArray = null;
-        try {
-            jsonArray = response.getJSONArray("data");
-        } catch (JSONException e) {
-            e.printStackTrace();
-            return;
-        }
+    public void success(Object response) {
+        if (!(response instanceof GalleryResponse)) return;
+        GalleryResponse gallery = (GalleryResponse) response;
         int count = 0;
         insertionIndex = imageList.size();
-        for (int i = 0; i < jsonArray.length(); i++ ) {
-            try {
-                JSONObject object = jsonArray.getJSONObject(i);
-                ImageDataModel model = new ImageDataModel();
-                model.setTitle(object.getString("title"));
-                if (!object.isNull("type") && object.getString("type").equals("image/gif")) {
-                    continue;
-                } else {
-                    JSONObject imageObject = object.getJSONArray("images").getJSONObject(0);
-                    if (imageObject.getString("type").equals("image/jpeg")
-                            || imageObject.getString("type").equals("image/png")
-                            || imageObject.getString("type").equals("image/jpg")) {
-                        model.setLinks(imageObject.getString("link"));
-                    }
+        for (GalleryPostResponse post: gallery.getData()) {
 
+                ImageDataModel model = new ImageDataModel();
+                model.setTitle(post.getTitle());
+
+                if (post.getImages().size() > 0) {
+                    ImageResponse imageResponse = post.getImages().get(0);
+                    if (imageResponse.getType().equals("image/jpeg")
+                            || imageResponse.getType().equals("image/png")
+                            || imageResponse.getType().equals("image/jpg")) {
+                        model.setLinks(imageResponse.getLink());
+                    }
                 }
-                if (model.getLinks() != null) {
+
+
+                if (!model.getLinks().isEmpty()) {
                     count++;
                     imageList.add(model);
+                    // for pagination purpose we are only fetching 11 items from each page
                     if (count > 10) {
                         break;
                     }
                 }
 
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
-        }
-        newItemsCount = imageList.size();
-        dataUpdateListener.onDataUpdate(insertionIndex, newItemsCount);
+            newItemsCount = imageList.size();
+            dataUpdateListener.onDataUpdate(insertionIndex, newItemsCount);
+
     }
 
     @Override
