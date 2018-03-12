@@ -11,13 +11,12 @@ import com.figure1.test.figure1test.presentation.listeners.OnDataUpdateListener;
 
 import java.util.ArrayList;
 
-public class DataViewModels extends ViewModel  implements AuthListener {
-    public static String TAG = "DataViewModels";
+public class DataPresenter extends ViewModel  implements AuthListener {
+    public static String TAG = "DataPresenter";
     private OnDataUpdateListener dataUpdateListener;
     private ArrayList<ImageDataModel> imageList = new ArrayList<>();
     private int insertionIndex = 0;
     private int newItemsCount;
-
 
 
     @Override
@@ -36,7 +35,7 @@ public class DataViewModels extends ViewModel  implements AuthListener {
                     if (imageResponse.getType().equals("image/jpeg")
                             || imageResponse.getType().equals("image/png")
                             || imageResponse.getType().equals("image/jpg")) {
-                        model.setLinks(imageResponse.getLink());
+                        model.setLinks(imageResponse.getUrl());
                     }
                 }
 

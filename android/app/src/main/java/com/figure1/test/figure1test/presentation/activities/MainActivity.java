@@ -14,14 +14,14 @@ import com.figure1.test.figure1test.model.ImageDataModel;
 import com.figure1.test.figure1test.network_layer.NetworkManager;
 import com.figure1.test.figure1test.presentation.adapters.ImageScrollAdapter;
 import com.figure1.test.figure1test.presentation.listeners.OnDataUpdateListener;
-import com.figure1.test.figure1test.presentation.presenters.DataViewModels;
+import com.figure1.test.figure1test.presentation.presenters.DataPresenter;
 import com.figure1.test.figure1test.R;
 
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements OnDataUpdateListener, SwipeRefreshLayout.OnRefreshListener {
-    private DataViewModels viewModel;
+    private DataPresenter dataPresenter;
     private ArrayList<ImageDataModel> dataModels;
     private RecyclerView recyclerView;
     private ImageScrollAdapter adapter;
@@ -35,18 +35,18 @@ public class MainActivity extends AppCompatActivity implements OnDataUpdateListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        viewModel = ViewModelProviders.of(this).get(DataViewModels.class);
+        dataPresenter = ViewModelProviders.of(this).get(DataPresenter.class);
         attachUI();
         setupAdapter();
-        viewModel.setDataUpdateListener(this);
-        if (viewModel.getImageList().isEmpty()) {
-            NetworkManager.networkManager.requestGalleryImageLoad(viewModel, 1);
+        dataPresenter.setDataUpdateListener(this);
+        if (dataPresenter.getImageList().isEmpty()) {
+            NetworkManager.getInstance().requestGalleryImageLoad(dataPresenter, startingIndexPage);
         }
     }
 
     private void setupAdapter() {
         if (recyclerView == null) return;
-        adapter = new ImageScrollAdapter(viewModel.getImageList());
+        adapter = new ImageScrollAdapter(dataPresenter.getImageList());
         recyclerView.setAdapter(adapter);
     }
 
@@ -64,8 +64,8 @@ public class MainActivity extends AppCompatActivity implements OnDataUpdateListe
         scrollListener = new PageScrolling(layoutManager, scrollingVisibleThreshold, startingIndexPage+1) {
             @Override
             public void onLoadMore(int page, int totalItemsCount) {
-                if (viewModel != null) {
-                    NetworkManager.networkManager.requestGalleryImageLoad(viewModel, page);
+                if (dataPresenter != null) {
+                    NetworkManager.getInstance().requestGalleryImageLoad(dataPresenter, page);
                 }
             }
         };
@@ -89,11 +89,11 @@ public class MainActivity extends AppCompatActivity implements OnDataUpdateListe
 
     @Override
     public void onRefresh() {
-        //NetworkManager.getInstance().cancelPreviousRequest();
+        NetworkManager.getInstance().cancelPreviousRequest();
         scrollListener.resetProperties();
         swipeRefreshLayout.setRefreshing(true);
-        viewModel.getImageList().clear();
+        dataPresenter.getImageList().clear();
         adapter.notifyDataSetChanged();
-        NetworkManager.networkManager.requestGalleryImageLoad(viewModel, startingIndexPage);
+        NetworkManager.getInstance().requestGalleryImageLoad(dataPresenter, startingIndexPage);
     }
 }

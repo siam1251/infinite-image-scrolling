@@ -20,7 +20,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkManager {
     private static String TAG = "NetworkManager";
-    public static NetworkManager networkManager = new NetworkManager();
+
+    private static NetworkManager networkManager;
     static final String BASE_URL = "https://api.imgur.com/3/gallery/";
     static final String clientID = "Client-Id e0d9382b96f900b";
 
@@ -30,6 +31,12 @@ public class NetworkManager {
 
     private GalleryServiceApi galleryServiceApi;
 
+    public static NetworkManager getInstance() {
+        if (networkManager == null) {
+            networkManager = new NetworkManager();
+        }
+        return networkManager;
+    }
     private GsonConverterFactory getGsonConverterFactory() {
         if (gsonConverterFactory == null) {
             Gson gson = new GsonBuilder()
@@ -80,9 +87,13 @@ public class NetworkManager {
         }
         return galleryServiceApi;
     }
+
+    public void cancelPreviousRequest() {
+        getClient().dispatcher().cancelAll();
+    }
     public void requestGalleryImageLoad(final AuthListener authListener, int page) {
 
-        Call<GalleryResponse> call = getGalleryServicApi().getGallery( 1);
+        Call<GalleryResponse> call = getGalleryServicApi().getGallery( page);
         call.enqueue(new Callback<GalleryResponse>() {
             @Override
             public void onResponse(Call<GalleryResponse> call, Response<GalleryResponse> response) {

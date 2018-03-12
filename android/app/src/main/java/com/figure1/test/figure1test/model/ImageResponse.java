@@ -12,7 +12,7 @@ public class ImageResponse {
     @SerializedName("type")
     private String type;
 
-    public String getLink() {
+    public String getUrl() {
         return link != null ? link:"";
     }
 
