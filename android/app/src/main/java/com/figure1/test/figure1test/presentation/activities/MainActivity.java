@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements OnDataUpdateListe
         swipeRefreshLayout = findViewById(R.id.image_swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
 
+
+
         recyclerView = findViewById(R.id.image_list_recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);

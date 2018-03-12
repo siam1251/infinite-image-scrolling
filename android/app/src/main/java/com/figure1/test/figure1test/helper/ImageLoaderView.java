@@ -6,12 +6,14 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.util.Size;
+import android.view.View;
 
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
 public class ImageLoaderView extends AppCompatImageView {
-    public static Size size;
+    public static int width;
+    public static int height;
     public ImageLoaderView(Context context) {
         super(context);
     }
@@ -72,8 +74,8 @@ public class ImageLoaderView extends AppCompatImageView {
         public Bitmap transform(Bitmap source) {
             int size = Math.min(source.getWidth(), source.getHeight());
             Bitmap bitmap;
-            if (ImageLoaderView.size != null) {
-                bitmap = Bitmap.createScaledBitmap(source, ImageLoaderView.size.getWidth(), ImageLoaderView.size.getHeight(), true);
+            if (ImageLoaderView.width != 0 && ImageLoaderView.height != 0) {
+                bitmap = Bitmap.createScaledBitmap(source, ImageLoaderView.width, ImageLoaderView.height, true);
             } else {
                 bitmap = Bitmap.createScaledBitmap(source, 300, 300, true);
 

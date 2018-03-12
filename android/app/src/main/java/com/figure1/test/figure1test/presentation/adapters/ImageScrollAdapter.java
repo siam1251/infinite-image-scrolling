@@ -1,5 +1,7 @@
 package com.figure1.test.figure1test.presentation.adapters;
 
+import android.support.annotation.Dimension;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 
 import android.util.Size;
@@ -22,7 +24,8 @@ public class ImageScrollAdapter extends RecyclerView.Adapter<ImageScrollAdapter.
     }
 
     private void configureImageSize() {
-        ImageLoaderView.size = new Size(500, 300);
+        ImageLoaderView.width = 500;
+        ImageLoaderView.height = 300;
     }
 
     @Override
